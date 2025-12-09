@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Receptionist Knowledge Base</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Reset and base */
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', sans-serif; }
+  body { display:flex; min-height:100vh; background:#121212; color:#e0e0e0; }
+
+  /* Sidebar */
+  .sidebar {
+    width:280px; background:#1f1f1f; padding:20px; display:flex; flex-direction:column; position:sticky; top:0; height:100vh; overflow-y:auto;
+  }
+  .sidebar h2 { font-weight:700; font-size:1.4rem; margin-bottom:20px; color:#00d1ff; }
+  .sidebar input { padding:10px; border:none; border-radius:8px; margin-bottom:20px; background:#2a2a2a; color:#fff; }
+  .sidebar ul { list-style:none; }
+  .sidebar li { padding:10px; cursor:pointer; border-radius:6px; transition:background 0.2s; }
+  .sidebar li:hover { background:#333; }
+  .sidebar li.active { background:#00d1ff; color:#121212; font-weight:600; }
+
+  /* Main content */
+  .main {
+    flex:1; padding:30px; overflow-y:auto;
+  }
+  .main h1 { font-size:2rem; margin-bottom:20px; color:#00d1ff; }
+  .main p, .main li { line-height:1.6; margin-bottom:10px; }
+  .main ul { list-style: disc inside; margin-bottom:20px; }
+  .main .process-content { display:none; animation:fadeIn 0.3s ease-in-out; }
+  .main .process-content.active { display:block; }
+
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+  /* Properties cards */
+  .properties { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; margin-bottom:40px; }
+  .property-card { background:#1f1f1f; padding:20px; border-radius:12px; transition:transform 0.3s; cursor:pointer; }
+  .property-card:hover { transform:translateY(-5px); background:#292929; }
+  .property-card h3 { margin-bottom:10px; color:#00d1ff; }
+  .property-card p { font-size:0.9rem; color:#ccc; }
+
+  /* Search highlight */
+  mark { background:#00d1ff; color:#121212; padding:0 4px; border-radius:4px; }
+
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>Rustia KB</h2>
+  <input type="text" id="searchInput" placeholder="Search processes...">
+  <ul id="processList">
+    <li data-target="home" class="active">Azzurro Hotels Properties</li>
+    <li data-target="to-do-logged-in">TO DO ONCE LOGGED IN</li>
+    <li data-target="check-in-prior">GUESTS CHECK IN PROCESS PRIOR ARRIVAL</li>
+    <li data-target="check-in-upon">GUESTS CHECK IN PROCESS UPON ARRIVAL</li>
+    <li data-target="release-codes">HOW TO RELEASE CODES</li>
+    <li data-target="check-out">GUESTS CHECK OUT PROCESS</li>
+    <li data-target="booking-extension">GUESTS BOOKING EXTENSION</li>
+    <li data-target="change-bed">CHANGE BED/ROOM ASSIGNMENT</li>
+    <li data-target="send-payment">SEND PAYMENT LINK</li>
+    <li data-target="send-tnc">SEND T&C FOR ACKNOWLEDGEMENT</li>
+	<li data-target="create-new-reservations">CREATE NEW RESERVATIONS</li>
+  </ul>
+</div>
+
+<div class="main">
+  <!-- Home / Properties -->
+  <div id="home" class="process-content active">
+    <h1>Azzurro Hotels Properties</h1>
+    <div class="properties">
+      <div class="property-card">
+        <h3><a href="https://www.notion.so/Potts-Point-17528baad20981ef8751ff3bce6e60c2" target="_blank" rel="noopener noreferrer" style="color:#1E90FF;">Potts Point</a></h3>
+        <p>141-143 Victoria St. Potts Point, NSW.<br>2-3 mins walk from King’s Cross Station.<br>Beige, Black and White Theme.<br>Backyard with Harbor View, Laundry, Onsite Receptionist.<br>All rooms have common bathrooms.</p>
+      </div>
+      <div class="property-card">
+        <h3>Central Sydney</h3>
+        <p>90 Wentworth Ave, Surry Hills, NSW.<br>Close to Central & Museum Station (4-5 mins walk).<br>Islander theme furniture with green kitchen.<br>No luggage area (They can leave their luggages in Surry Hills) | Busy street outside.</p>
+      </div>
+      <div class="property-card">
+        <h3>Surry Hills</h3>
+        <p>82 Flinders St. Darlinghurst, NSW.<br>Mixed property, some female-only rooms.<br>Marble bathroom, calming modern vibe.<br>Luggage area near kitchen with code 1234.<br>Quiet neighborhood.</p>
+      </div>
+      <div class="property-card">
+        <h3>Darling Harbour</h3>
+        <p>22 Allen St. Pyrmont, NSW.<br>Biggest property with most beds.<br>Private rooms only, family rooms available.<br>Close to convention station, Cloud Beds central system.</p>
+      </div>
+	  <div class="property-card">
+        <h3>The Pyrmont Budget Hotel</h3>
+        <p>11 Pyrmont Ave, Pyrmont, NSW.<br>Close to Convention Station (7 mins walk) & Pyrmont Bay Station (3 mins walk).<br>Mostly private rooms.<br>No luggage area | No Breakfast and Dinner.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Example process content -->
+  <div id="to-do-logged-in" class="process-content">
+    <h1>TO DO ONCE LOGGED IN</h1>
+    <p>Open Ring, Notion, Cloudbeds, GHL, GOKI and Excel files (Check-ins File | Dinner Reg).</p>
+    <ul>
+      <li><strong>Ring:</strong> Go to your respected property.</li>
+      <li><strong>Cloudbeds:</strong> Go to your property then go to Calendar.</li>
+      <li><strong>Check-Ins File:</strong> Check the occupancy % matches Cloudbeds.</li>
+      <li><strong>GOKI:</strong> Go to your property (Address).</li>
+      <li><strong>GHL:</strong> Go to Conversations, assign property owners.</li>
+	  <li><strong>Notion:</strong> Go to property infro.</li>
+	  <li><strong>Dinner Reservation:</strong> In case the guests would like to be added to the dinner list</li>
+    </ul>
+  </div>
+
+  <div id="check-in-prior" class="process-content">
+    <h1>GUESTS CHECK IN PROCESS PRIOR ARRIVAL</h1>
+      <p>Step 1. Got to Check-Ins File, See the pending check-ins and check if they have completed the check in process (T&C and ID)</p>
+	  <img src="images/step-one.jpeg" alt="Step One" style="width:1000px;">
+	  <br></br>
+      <p>Step 2. If no
+        <ul>
+          <li>Check email and GHL, search for the guests name, if no check in requirements can be found, send check in reminder.</li>
+          <li>To send reminder: Go to Cloudbeds Wistle (Messaging platform).</li>
+	  <img src="images/wistle.jpeg" alt="Wistle" style="width:1000px;"><br></br>
+		  <li>Search for the guests, check if a reminder message has already been sent (if not, send a reminder)</li>
+	  <img src="images/wistle-search.jpeg" alt="Wistle" style="width:1000px;"><br></br>
+	      <li>To send the reminder, click Template, choose "Digital Documents" and then click Insert Variable.</li>
+	  <img src="images/variable.jpeg" alt="Variable" style="width:1000px;"><br></br>
+	      <li>Once done with the steps, accommodate the guest upon arrival.</li>
+        </ul>
+      </p>
+      <p>Step 3. If requirements completed → release GOKI code.</p>
+  </div>
+
+  <!-- Add all other process contents similarly -->
+  <div id="check-in-upon" class="process-content">
+    <h1>GUESTS CHECK IN PROCESS UPON ARRIVAL</h1>
+    <ul>
+      <p><strong>Step 1.</strong> Ask for name, pull up reservation in Cloudbeds.</p>
+	  <img src="images/cloud.jpeg" alt="Cloudbeds" style="width:1000px;"><br></br>
+      <p><strong>Step 2.</strong> While Cloudbeds is loading, go to Check-Ins File to see if proces has been completed. Sync manually with Cloudbeds.</p>
+	  <img src="images/completed.jpeg" alt="Cloudbeds" style="width:1000px;"><br></br>
+	  <p><strong>Step 3.</strong> Double check with Cloudbeds if the documents needed for check-in is already uploaded.</p>
+	  <p>If yes, proceed to Step 4.</p>
+	  <img src="images/double-cloud.jpeg" alt="Cloudbeds" style="width:1000px;"><br></br>
+	  <p><strong>IF PROCESS HAS NOT BEEN COMPLETED</STRONG></P>
+	  <li>Ask the guests to send us a copy of their Australian Valid ID or Valid Passport through Whatsapp</p>
+      <li>Send T&C via GHL and confirm acknowledgment</li>
+		<ul>
+			<p><strong>To send T&C via GHL</p></strong>
+			<li>Go to Conversation thread</li>
+			<li>Click the "+" sign</li>
+			<li>Search for "Link"</p>
+			<li>Select "Custom Values/Digital Check-in"</li>
+		<img src="images/digital.jpeg" alt="Digital Check-in" style="width:1000px;"><br></br>
+	  <li>For them to complete the process, advise the client to acknowledge the T&C by replying"I agree"</li><br></br>
+      <p><strong>Step 4.</strong> Release GOKI access after completion.</p>
+    </ul>
+  </div>
+
+  <div id="release-codes" class="process-content">
+    <h1>HOW TO RELEASE CODES</h1>
+    <ul>
+      <li>Open Cloudbeds, check guest reservation, and mark checked-in.</li>
+      <li>Copy confirmation codes from GOKI to Check-In Details.</li>
+      <li>Send check-in details to guest via GHL or Whistle.</li>
+    </ul>
+  </div>
+
+  <div id="check-out" class="process-content">
+    <h1>GUESTS CHECK OUT PROCESS</h1>
+    <p>No checkout process if no borrowed items. If borrowed items exist, return to reception to release deposit.</p>
+  </div>
+
+  <div id="booking-extension" class="process-content">
+    <h1>GUESTS BOOKING EXTENSION</h1>
+    <ul>
+      <li>Check availability in Cloudbeds.</li>
+      <li>Send payment link and confirm extension.</li>
+      <li>Update GOKI keys and internal trackers.</li>
+    </ul>
+  </div>
+
+  <div id="change-bed" class="process-content">
+    <h1>CHANGE BED/ROOM ASSIGNMENT</h1>
+    <p>Check Cloudbeds for availability, reassign bed, update reservation notes and GOKI details.</p>
+  </div>
+
+  <div id="send-payment" class="process-content">
+    <h1>SEND PAYMENT LINK</h1>
+    <p>Use Cloudbeds folio → Add Payment → Pay by Link → Copy link → Send via GHL/WhatsApp.</p>
+  </div>
+
+  <div id="send-tnc" class="process-content">
+    <h1>SEND T&C FOR ACKNOWLEDGEMENT</h1>
+    <p>Use GHL Conversations → Plus button → Custom Values → Digital Check-In → Send.</p>
+  </div>
+  
+  <div id="create-new-reservations" class="process-content">
+    <h1>SEND T&C FOR ACKNOWLEDGEMENT</h1>
+    <p>Use GHL Conversations → Plus button → Custom Values → Digital Check-In → Send.</p>
+  </div>
+
+</div>
+
+<script>
+  const processItems = document.querySelectorAll('.sidebar li');
+  const contents = document.querySelectorAll('.process-content');
+  const searchInput = document.getElementById('searchInput');
+
+  processItems.forEach(item => {
+    item.addEventListener('click', () => {
+      processItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      const target = item.getAttribute('data-target');
+      contents.forEach(c => c.classList.remove('active'));
+      document.getElementById(target).classList.add('active');
+      window.scrollTo(0,0);
+    });
+  });
+
+  searchInput.addEventListener('input', () => {
+    const filter = searchInput.value.toLowerCase();
+    processItems.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      item.style.display = text.includes(filter) ? '' : 'none';
+    });
+  });
+</script>
+
+</body>
+</html>
